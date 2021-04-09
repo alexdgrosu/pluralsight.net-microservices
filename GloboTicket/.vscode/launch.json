@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build:Services:EventCatalog",
             // If you have changed target frameworks, make sure to update the program relopath.
-            "program": "${workspaceFolder}/GloboTicket/GloboTicket.Services.EventCatalog/bin/Debug/net5.0/GloboTicket.Services.EventCatalog.dll",
+            "program": "${workspaceFolder}/GloboTicket.Services.EventCatalog/bin/Debug/net5.0/GloboTicket.Services.EventCatalog.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/GloboTicket/GloboTicket.Services.EventCatalog",
+            "cwd": "${workspaceFolder}/GloboTicket.Services.EventCatalog",
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
@@ -28,9 +28,9 @@
             "request": "launch",
             "preLaunchTask": "build:Services:EventCatalog",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/GloboTicket/GloboTicket.Client/bin/Debug/net5.0/GloboTicket.Client.dll",
+            "program": "${workspaceFolder}/GloboTicket.Client/bin/Debug/net5.0/GloboTicket.Client.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/GloboTicket/GloboTicket.Client",
+            "cwd": "${workspaceFolder}/GloboTicket.Client",
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
