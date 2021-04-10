@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace GloboTicket.Client
+namespace GloboTicket.Web
 {
     public class Program
     {
