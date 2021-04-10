@@ -20,6 +20,7 @@ namespace GloboTicket.Services.EventCatalog.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.Event>>> Get([FromQuery] Guid categoryId)
         {
             var result = await _repository.GetEvents(categoryId);
