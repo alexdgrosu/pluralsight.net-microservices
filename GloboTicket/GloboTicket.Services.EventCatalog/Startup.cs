@@ -1,4 +1,5 @@
 using GloboTicket.Services.EventCatalog.DbContexts;
+using GloboTicket.Services.EventCatalog.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,9 @@ namespace GloboTicket.Services.EventCatalog
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
