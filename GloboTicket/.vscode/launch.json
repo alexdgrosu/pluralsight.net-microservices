@@ -1,5 +1,17 @@
 {
     "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "web: all",
+            "configurations": ["web: Services:EventCatalog", "web: Services:ShoppingBasket", "web: Client"],
+            "preLaunchTask": "build",
+            "presentation": {
+                "hidden": false,
+                "group": "compounds",
+                "order": 1
+            }
+        }
+    ],
     "configurations": [
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
@@ -17,16 +29,44 @@
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "ASPNETCORE_URLS": "http://localhost:8010;https://localhost:8011"
+            },
+            "presentation": {
+                "hidden": false,
+                "group": "individual",
+                "order": 2
             }
         },
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
             // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-            "name": "web: Services:Client",
+            "name": "web: Services:ShoppingBasket",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build:Services:EventCatalog",
+            "preLaunchTask": "build:Services:ShoppingBasket",
+            // If you have changed target frameworks, make sure to update the program relopath.
+            "program": "${workspaceFolder}/GloboTicket.Services.ShoppingBasket/bin/Debug/net5.0/GloboTicket.Services.ShoppingBasket.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/GloboTicket.Services.ShoppingBasket",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:8020;https://localhost:8021"
+            },
+            "presentation": {
+                "hidden": false,
+                "group": "individual",
+                "order": 3
+            }
+        },
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+            "name": "web: Client",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build:Client",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/GloboTicket.Client/bin/Debug/net5.0/GloboTicket.Client.dll",
             "args": [],
@@ -34,15 +74,13 @@
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "http://localhost:8020;https://localhost:8021"
+                "ASPNETCORE_URLS": "http://localhost:8100;https://localhost:8101"
+            },
+            "presentation": {
+                "hidden": false,
+                "group": "individual",
+                "order": 4
             }
-        }
-    ],
-    "compounds": [
-        {
-            "name": "web: all",
-            "configurations": ["web: Services:EventCatalog", "web: Services:Client"],
-            "preLaunchTask": "build"
         }
     ]
 }

@@ -44,6 +44,30 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build:Services:ShoppingBasket",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish:Services:ShoppingBasket",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build:Client",
             "command": "dotnet",
             "type": "process",
@@ -66,6 +90,7 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        }
+        },
+        
     ]
 }
