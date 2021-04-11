@@ -37,5 +37,11 @@ namespace GloboTicket.Client.Controllers
         {
             return RedirectToAction("Index", new { categoryId = selectedCategory });
         }
+
+        public async Task<IActionResult> Detail(Guid eventId)
+        {
+            var @event = await _service.GetEvent(eventId);
+            return View(@event);
+        }
     }
 }
