@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using GloboTicket.Web.Models;
 using GloboTicket.Web.Services;
 using Microsoft.AspNetCore.Builder;
@@ -25,18 +26,24 @@ namespace GloboTicket.Web
         public void ConfigureServices(IServiceCollection services)
         {
             var mvcBuilder = services.AddControllersWithViews();
+            var httpBuilder = services.AddHttpClient<IEventCatalogService, EventCatalogService>(config =>
+             {
+                 config.BaseAddress = new Uri(Configuration["ApiConfigs:EventCatalog:Uri"]);
+             });
 
             if (Environment.IsDevelopment())
             {
                 mvcBuilder.AddRazorRuntimeCompilation();
+                httpBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (_message, _cert, _certChain, _policyErrors) =>
+                    {
+                        return true;
+                    }
+                });
             }
 
-            services.AddHttpClient<IEventCatalogService, EventCatalogService>(config => 
-            {
-                config.BaseAddress = new Uri(Configuration["ApiConfigs:EventCatalog:Uri"]);
-            });
-
-            services.AddSingleton<Settings>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,10 +52,6 @@ namespace GloboTicket.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseHttpsRedirection();
