@@ -1,4 +1,5 @@
 using GloboTicket.Services.ShoppingBasket.DbContexts;
+using GloboTicket.Services.ShoppingBasket.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,10 @@ namespace GloboTicket.Services.ShoppingBasket
             services.AddDbContext<ShoppingBasketDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IBasketLineRepository, BasketLineRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
