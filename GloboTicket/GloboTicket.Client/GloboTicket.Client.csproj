@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
+    <RootNamesapce>GloboTicket.Web</RootNamesapce>
   </PropertyGroup>
 
   <ItemGroup>

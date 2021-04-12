@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using GloboTicket.Web.Models;
 using GloboTicket.Web.Services;
@@ -26,24 +28,29 @@ namespace GloboTicket.Web
         public void ConfigureServices(IServiceCollection services)
         {
             var mvcBuilder = services.AddControllersWithViews();
-            var httpBuilder = services.AddHttpClient<IEventCatalogService, EventCatalogService>(config =>
-             {
-                 config.BaseAddress = new Uri(Configuration["ApiConfigs:EventCatalog:Uri"]);
-             });
+
+            var httpClients = new List<IHttpClientBuilder>
+            {
+                services.AddHttpClient<IEventCatalogService, EventCatalogService>(config =>
+                    config.BaseAddress = new Uri(Configuration["ApiConfigs:EventCatalog:Uri"])),
+                services.AddHttpClient<IShoppingBasketService, ShoppingBasketService>(config =>
+                    config.BaseAddress = new Uri(Configuration["ApiConfigs:ShoppingBasket:Uri"]))
+            };
 
             if (Environment.IsDevelopment())
             {
                 mvcBuilder.AddRazorRuntimeCompilation();
-                httpBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+                httpClients.ForEach(client =>
                 {
-                    ClientCertificateOptions = ClientCertificateOption.Manual,
-                    ServerCertificateCustomValidationCallback = (_message, _cert, _certChain, _policyErrors) =>
+                    client.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
                     {
-                        return true;
-                    }
+                        ClientCertificateOptions = ClientCertificateOption.Manual,
+                        ServerCertificateCustomValidationCallback = (_message, _cert, _certChain, _policyErrors) => true
+                    });
                 });
             }
 
+            services.AddSingleton<Settings>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
