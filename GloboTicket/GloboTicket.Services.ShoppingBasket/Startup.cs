@@ -5,7 +5,6 @@ using GloboTicket.Services.ShoppingBasket.Repositories;
 using GloboTicket.Services.ShoppingBasket.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +47,10 @@ namespace GloboTicket.Services.ShoppingBasket
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketLineRepository, BasketLineRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,10 +65,7 @@ namespace GloboTicket.Services.ShoppingBasket
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
